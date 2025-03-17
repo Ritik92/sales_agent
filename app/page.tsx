@@ -8,7 +8,7 @@ import ChatInterface from '@/components/ChatInterface';
 import { ChatMessage, ChatScript, OraclAStats } from '@/lib/types';
 import { initialChatScript } from '@/lib/chatScript';
 import RightPanel from '@/components/RightPanel';
-
+import Sidebar from '@/components/Sidebar';
 
 
 export default function Home() {
@@ -74,7 +74,14 @@ export default function Home() {
 
   return (
     <main className="flex h-screen bg-white">
-      
+      <Sidebar username={username} progress={progress} />
+      <div className="flex flex-col flex-grow">
+        <div className='p-4 text-[#484848]'>
+          Welcome,
+          <div className='text-2xl  font-semibold'> 
+            Fabio Rossi
+          </div>
+        </div>
         <div className="flex h-full ml-8 mr-8 border border-gray-200">
           <ChatInterface 
             messages={messages} 
@@ -88,7 +95,7 @@ export default function Home() {
             useSuggestion={useSuggestion}
           />
         </div>
-     
+      </div>
     </main>
   );
 }

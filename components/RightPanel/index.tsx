@@ -21,7 +21,7 @@ export default function RightPanel({
   useSuggestion 
 }: RightPanelProps) {
   return (
-    <div className="w-[40%]   flex flex-col bg-gradient-to-b from-white to-purple-200">
+    <div className="w-[40%]   flex flex-col ">
       <div className="p-4 flex items-center justify-center border-b border-gray-200">
         <div className="flex items-center ">
           <span className="text-purple-800 font-bold">OraclA</span>
@@ -30,7 +30,7 @@ export default function RightPanel({
         <div>
         </div>
       </div>
-      <div className='border border-gray-200'>
+      <div className='border border-gray-200 ml-6 bg-gradient-to-b from-white to-purple-200 h-full'>
       <MetricsPanel stats={stats} />
       
       <div className="p-4">
