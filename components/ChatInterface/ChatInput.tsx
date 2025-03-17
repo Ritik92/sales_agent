@@ -16,7 +16,7 @@ export default function ChatInput({ value, onChange, onSend }: ChatInputProps) {
   }
 
   return (
-    <div className="flex items-center p-2 md:p-3 border-t border-gray-200">
+    <div className="flex h-full items-center p-2 md:p-3 border-t border-gray-200">
       <button className="text-gray-400 hover:text-gray-600 mr-2 hidden sm:block">
         <svg
           xmlns="http://www.w3.org/2000/svg"

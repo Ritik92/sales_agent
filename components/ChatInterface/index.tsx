@@ -22,7 +22,7 @@ export default function ChatInterface({ messages, sendMessage }: ChatInterfacePr
   }
 
   return (
-    <div className="flex flex-col flex-1 border-r border-gray-200 overflow-hidden">
+    <div className="flex flex-col flex-1 border-r border-gray-200 overflow-auto">
       <div className="flex items-center px-4 py-3 border-b border-gray-200">
         <div className="flex items-center">
           <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
@@ -32,7 +32,7 @@ export default function ChatInterface({ messages, sendMessage }: ChatInterfacePr
         </div>
       </div>
 
-      <div className="flex-1 overflow-hidden">
+      <div className="h-full overflow-auto">
         <ChatHistory messages={messages} />
       </div>
 

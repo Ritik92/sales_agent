@@ -58,8 +58,9 @@ export default function RightPanel({
   }, [lastMessage, simulateLoading])
 
   return (
-    <div className="hidden md:flex md:w-2/5 lg:w-[40%] flex-col h-full">
-      <div className="p-2 sm:p-3 flex items-center justify-center border-b border-gray-200">
+    <div className="hidden md:flex md:w-2/5 lg:w-[50%] flex-col h-full">
+      {/* Header */}
+      <div className="py-3 px-4 flex items-center justify-center border-b border-gray-200">
         <div className="flex items-center">
           <span className="bg-gradient-to-r from-purple-900 to-purple-500 text-transparent bg-clip-text font-normal text-xl md:text-2xl">
             OraclA
@@ -69,27 +70,31 @@ export default function RightPanel({
           </span>
         </div>
       </div>
-      <div className="border border-gray-200 bg-gradient-to-b from-white to-purple-200 flex-1 overflow-hidden flex flex-col">
-        <div className="p-2 sm:p-3">
+
+      {/* Main content area */}
+      <div className="border border-gray-200 bg-gradient-to-b from-white to-purple-200 h-full flex flex-col overflow-hidden">
+        {/* Metrics section */}
+        <div className="p-3 md:p-4 border-b border-gray-100">
           <MetricsPanel stats={stats} />
         </div>
 
-        <div className="p-2 sm:p-3 flex-shrink-0">
-          <div className="flex items-center mb-1 sm:mb-2">
+        {/* Last message section */}
+        <div className="p-3 md:p-4 border-b border-gray-100">
+          <div className="flex items-center mb-2">
             <Image 
               src="/message_icon.png" 
               alt="OraclA" 
               width={16} 
               height={16} 
-              className="mt-1" 
+              className="flex-shrink-0" 
             />
             <span className="text-gray-600 text-xs sm:text-sm ml-2">Last message</span>
           </div>
-
           <LastMessage message={lastMessage} />
         </div>
 
-        <div className="p-2 sm:p-3 flex-shrink-0">
+        {/* Conversation paths section */}
+        <div className="p-3 md:p-4 border-b border-gray-100">
           <ConversationPaths
             currentStep={currentStep}
             suggestionsCount={suggestionsCount}
@@ -98,7 +103,8 @@ export default function RightPanel({
           />
         </div>
 
-        <div className="flex-1 p-2 sm:p-3 overflow-auto min-h-0">
+        {/* Suggestions section - allow this to scroll if content overflows */}
+        <div className="flex-1 p-3 md:p-4 overflow-y-auto">
           <SuggestionPanel
             suggestions={scriptStep.suggestions}
             useSuggestion={useSuggestion}

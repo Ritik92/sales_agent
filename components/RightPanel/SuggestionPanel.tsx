@@ -42,9 +42,10 @@ export default function SuggestionPanel({ suggestions, useSuggestion, isLoading 
   }
 
   return (
-    <div className="pt-1">
-      <div className="flex items-center mb-1 sm:mb-2 text-xs sm:text-sm md:text-base font-medium text-gray-800">
-        <span className="text-pink-500 mr-1 flex-shrink-0">
+    <div>
+      {/* Header */}
+      <div className="flex items-center mb-3 text-xs sm:text-sm md:text-base font-medium text-gray-800">
+        <span className="text-pink-500 mr-2 flex-shrink-0">
           <Image
             src="/followupicon.png"
             alt="followupicon"
@@ -56,11 +57,13 @@ export default function SuggestionPanel({ suggestions, useSuggestion, isLoading 
         <span className="line-clamp-2 sm:line-clamp-1">Top message follow-up recommendation</span>
       </div>
 
-      <div className="space-y-2 sm:space-y-3 overflow-auto">
+      {/* Suggestions list */}
+      <div className="space-y-3 md:space-y-4">
         {suggestions.map((suggestion) => (
-          <div key={suggestion.id} className="bg-white border border-blue-200 rounded-xl p-2 sm:p-3 md:p-4 shadow-sm">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-1 sm:mb-2 gap-1 sm:gap-2">
-              <div className="bg-green-50 text-green-700 px-2 py-0.5 rounded-full text-xs font-medium w-fit">
+          <div key={suggestion.id} className="bg-white border border-blue-200 rounded-xl p-3 md:p-4 shadow-sm">
+            {/* Suggestion header */}
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 gap-2">
+              <div className="bg-green-50 text-green-700 px-2 py-1 rounded-full text-xs font-medium w-fit">
                 +{suggestion.score}% {suggestion.scoreLabel}
               </div>
               <button className="text-xs sm:text-sm font-medium flex items-center w-fit">
@@ -77,10 +80,12 @@ export default function SuggestionPanel({ suggestions, useSuggestion, isLoading 
               </button>
             </div>
 
-            <p className="text-xs sm:text-sm md:text-base text-gray-700 mb-1 sm:mb-2">{suggestion.content}</p>
+            {/* Suggestion content */}
+            <p className="text-xs sm:text-sm md:text-base text-gray-700 mb-3">{suggestion.content}</p>
 
+            {/* Action button */}
             <button
-              className="text-indigo-500 text-xs sm:text-sm md:text-base font-medium"
+              className="text-indigo-500 text-xs sm:text-sm md:text-base font-medium mt-1"
               onClick={() => handleUseSuggestion(suggestion.content)}
             >
               Use suggestion
@@ -99,46 +104,46 @@ function SuggestionSkeleton({ count = 2, progress = 0 }) {
   const stageThree = progress >= 0.6
 
   return (
-    <div className="space-y-2 sm:space-y-3">
+    <div className="space-y-3 md:space-y-4">
       {Array.from({ length: count }).map((_, index) => (
         <div
           key={index}
-          className="bg-white border border-blue-200 rounded-xl p-2 sm:p-3 md:p-4 shadow-sm transition-all duration-300"
+          className="bg-white border border-blue-200 rounded-xl p-3 md:p-4 shadow-sm transition-all duration-300"
           style={{ opacity: Math.min(0.4 + progress * 0.6, 1) }}
         >
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-1 sm:mb-2 gap-1 sm:gap-2">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 gap-2">
             {stageOne ? (
-              <div className="bg-gray-100 h-3 sm:h-4 w-12 sm:w-16 rounded-full animate-pulse"></div>
+              <div className="bg-gray-100 h-4 w-16 sm:w-20 rounded-full animate-pulse"></div>
             ) : (
-              <div className="bg-green-50 text-green-700 px-2 py-0.5 rounded-full text-xs font-medium opacity-70 w-fit">
+              <div className="bg-green-50 text-green-700 px-2 py-1 rounded-full text-xs font-medium opacity-70 w-fit">
                 {stageThree ? "+15% Clarifies position" : "+--% Loading..."}
               </div>
             )}
 
-            <div className="bg-gray-100 h-3 sm:h-4 w-24 sm:w-28 md:w-32 rounded animate-pulse"></div>
+            <div className="bg-gray-100 h-4 w-28 md:w-32 rounded animate-pulse"></div>
           </div>
 
-          <div className="space-y-1 sm:space-y-2">
+          <div className="space-y-2 mb-3">
             {stageOne ? (
               <>
-                <div className="bg-gray-100 h-2 sm:h-3 w-16 sm:w-20 rounded animate-pulse"></div>
-                <div className="bg-gray-100 h-2 sm:h-3 w-20 sm:w-24 rounded animate-pulse"></div>
+                <div className="bg-gray-100 h-3 w-full rounded animate-pulse"></div>
+                <div className="bg-gray-100 h-3 w-full rounded animate-pulse"></div>
               </>
             ) : stageTwo ? (
               <>
-                <div className="bg-gray-100 h-3 sm:h-4 w-full rounded animate-pulse"></div>
-                <div className="bg-gray-100 h-3 sm:h-4 w-3/4 rounded animate-pulse"></div>
+                <div className="bg-gray-100 h-4 w-full rounded animate-pulse"></div>
+                <div className="bg-gray-100 h-4 w-3/4 rounded animate-pulse"></div>
               </>
             ) : (
-              <div className="text-xs sm:text-sm md:text-base mb-1 sm:mb-2 text-gray-500">Loading suggestion content...</div>
+              <div className="text-xs sm:text-sm md:text-base text-gray-500">Loading suggestion content...</div>
             )}
           </div>
 
-          <div className="mt-1 sm:mt-2">
+          <div className="mt-2">
             {stageThree ? (
               <div className="text-indigo-400 text-xs sm:text-sm md:text-base font-medium">Use suggestion</div>
             ) : (
-              <div className="bg-gray-100 h-3 sm:h-4 w-16 sm:w-20 rounded animate-pulse"></div>
+              <div className="bg-gray-100 h-4 w-20 rounded animate-pulse"></div>
             )}
           </div>
         </div>
