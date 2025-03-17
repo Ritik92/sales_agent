@@ -52,15 +52,15 @@ export default function ConversationPaths({
     <div className="relative">
       <div className="flex items-center mb-2">
         <Image src={'/arrow_icon.png'} alt="OraclA" width={16} height={16} className='m-1' />
-        <span className="text-gray-600 text-sm">
+        <span className="text-gray-600 text-xs sm:text-sm">
           {isLoading 
             ? "Calculating possible conversation paths" 
             : `Calculating possible conversation paths - ${suggestionsCount} suggestions found.`}
         </span>
-        <span className="text-gray-600 text-sm ml-1">✨</span>
+        <span className="text-gray-600 text-xs sm:text-sm ml-1">✨</span>
       </div>
       
-      <div className="relative h-40 w-full overflow-visible"> {/* Changed to overflow-visible */}
+      <div className="relative h-28 sm:h-32 md:h-40 w-full overflow-visible"> {/* Adjusted height to be responsive */}
         {isLoading ? (
           <AnimatedDotsPattern progress={animationProgress} />
         ) : (
@@ -182,7 +182,7 @@ function DotsPattern({
                 <circle 
                   cx={x} 
                   cy={y} 
-                  r={12}
+                  r={15}
                   fill="transparent"
                   className="cursor-pointer"
                   onMouseEnter={() => onHover(dotIndex)}
@@ -194,7 +194,7 @@ function DotsPattern({
               <circle 
                 cx={x} 
                 cy={y} 
-                r={isHovered ? 6 : 5}
+                r={isHovered ? 12 : 10}
                 fill={dotFill}
                 className={`${isHighlighted ? "cursor-pointer" : "opacity-30"} transition-all duration-200`}
                 onMouseEnter={() => isHighlighted && onHover(dotIndex)}
@@ -235,7 +235,7 @@ interface SuggestionTooltipProps {
 function SuggestionTooltip({ suggestion, onUseSuggestion }: SuggestionTooltipProps) {
   return (
     <div 
-      className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg min-w-[300px] max-w-[350px] z-20 pointer-events-auto"
+      className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg min-w-[200px] sm:min-w-[250px] md:min-w-[300px] max-w-[350px] z-20 pointer-events-auto"
       style={{
         // Add gradient border matching the image
         border: "1px solid",
@@ -244,19 +244,19 @@ function SuggestionTooltip({ suggestion, onUseSuggestion }: SuggestionTooltipPro
         borderImageSource: "linear-gradient(to right, #3b82f6, #db2777)"
       }}
     >
-      <div className="p-4">
-        <div className="flex justify-between items-center mb-2">
+      <div className="p-2 sm:p-3 md:p-4">
+        <div className="flex justify-between items-center mb-1 sm:mb-2">
           <div className="bg-green-100 text-green-800 px-2 py-0.5 rounded text-xs">
             +{suggestion.score}% {suggestion.scoreLabel}
           </div>
           <button 
-            className="text-purple-600 text-sm hover:underline cursor-pointer"
+            className="text-purple-600 text-xs sm:text-sm hover:underline cursor-pointer"
             onClick={onUseSuggestion}
           >
             Use suggestion
           </button>
         </div>
-        <p className="text-gray-700 text-sm">{suggestion.content}</p>
+        <p className="text-gray-700 text-xs sm:text-sm">{suggestion.content}</p>
       </div>
       {/* Add speech bubble pointer */}
       <div 
@@ -349,7 +349,7 @@ function AnimatedDotsPattern({ progress = 0 }) {
               key={`${rowIndex}-${colIndex}`} 
               cx={x} 
               cy={y} 
-              r={5}
+              r={10}
               fill={fill}
               className={isRowActive || isPartialDot ? "" : "opacity-40"}
             />
