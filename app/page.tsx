@@ -1,10 +1,13 @@
 // src/app/page.tsx
 'use client';
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+
 import ChatInterface from '@/components/ChatInterface';
+
 import { ChatMessage, ChatScript, OraclAStats } from '@/lib/types';
 import { initialChatScript } from '@/lib/chatScript';
+import RightPanel from '@/components/RightPanel';
 
 
 
@@ -65,6 +68,9 @@ export default function Home() {
     }, 1000);
   };
 
+  const useSuggestion = (suggestion: string) => {
+    sendMessage(suggestion);
+  };
 
   return (
     <main className="flex h-screen bg-white">
@@ -74,9 +80,15 @@ export default function Home() {
             messages={messages} 
             sendMessage={sendMessage} 
           />
-          
+          <RightPanel
+            stats={stats}
+            lastMessage={messages[messages.length - 1]}
+            currentStep={currentStep}
+            scriptStep={initialChatScript.steps[currentStep]}
+            useSuggestion={useSuggestion}
+          />
         </div>
-      
+     
     </main>
   );
 }
